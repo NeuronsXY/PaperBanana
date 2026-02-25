@@ -41,7 +41,9 @@ cd PaperBanana
 
 ### Step2: Configuration
 PaperBanana supports configuring API keys from a YAML configuration file or via environment variables. 
-We recommend duplicate the `configs/model_config.template.yaml` file into `configs/model_config.yaml` to externalize all user configurations. This file is ignored by git to keep your api keys and configurations secret.
+
+We recommend duplicate the `configs/model_config.template.yaml` file into `configs/model_config.yaml` to externalize all user configurations. This file is ignored by git to keep your api keys and configurations secret. In `model_config.yaml`, remember to fill in the two model names (`defaults.model_name` and `defaults.image_model_name`) and set at least one API key under `api_keys` (e.g. `google_api_key` for Gemini models).
+
 Note that if you need to generate many candidates simultaneously, you will require an API key that supports high concurrency.
 
 ### Step3: Downloading the Dataset

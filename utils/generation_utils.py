@@ -103,6 +103,12 @@ async def call_gemini_with_retry_async(
     """
     ASYNC: Call Gemini API with asynchronous retry logic.
     """
+    if gemini_client is None:
+        raise RuntimeError(
+            "Gemini client was not initialized: missing Google API key. "
+            "Please set GOOGLE_API_KEY in environment, or configure api_keys.google_api_key in configs/model_config.yaml."
+        )
+
     result_list = []
     target_candidate_count = config.candidate_count
     # Gemini API max candidate count is 8. We will call multiple times if needed.
@@ -114,7 +120,7 @@ async def call_gemini_with_retry_async(
         try:
             # Use global client
             client = gemini_client
-            
+
             # Convert generic content list to Gemini's format right before the API call
             gemini_contents = _convert_to_gemini_parts(current_contents)
             response = await client.aio.models.generate_content(
